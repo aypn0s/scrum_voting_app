@@ -1,0 +1,25 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <div class="d-flex align-items-center justify-content-between py-3">
+        <h3>Scrum Voting App</h3>
+        <%= @participant.name %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">  
+      <%= @task.title %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">  
+      <h4 class="text-center">Participants</h4>
+      <%= render 'participants/participant', task: @task %>
+    </div>
+  </div>
+
+</div>

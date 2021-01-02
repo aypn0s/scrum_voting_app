@@ -1,0 +1,7 @@
+<ul id="participants" class="list-group">
+  <% task.ordered_participants.each do |participant| %>
+    <li class="list-group-item">
+      <%= participant.name %>
+    </li>
+  <% end %>
+</ul>
