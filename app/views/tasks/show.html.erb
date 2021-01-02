@@ -1,23 +1,43 @@
+<%= turbo_stream_from 'task' %>
+
 <div class="container">
 
   <div class="row">
     <div class="col">
       <div class="d-flex align-items-center justify-content-between py-3">
         <h3>Scrum Voting App</h3>
-        <%= @participant.name %>
+        <%= turbo_frame_tag 'participant_name' do %>
+          <%= render 'participants/form', participant: @participant %>
+        <% end %>
       </div>
     </div>
   </div>
 
   <div class="row mt-5">
     <div class="col">  
-      <%= @task.title %>
+      <%= turbo_frame_tag 'task_title' do %>
+        <%= render 'tasks/form', task: @task %>
+      <% end %>
     </div>
   </div>
 
   <div class="row mt-5">
     <div class="col">  
-      <h4 class="text-center">Participants</h4>
+      <%= turbo_frame_tag 'vote_form', src: participant_vote_form_path(@participant) %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-10 offset-1">  
+      
+      <div class="d-flex justify-content-between">
+        <h4>Participants</h4>
+
+        <%= turbo_frame_tag 'reveal_form' do %>
+          <%= render 'tasks/reveal_form', task: @task %>
+        <% end %>
+      </div>
+
       <%= render 'participants/participant', task: @task %>
     </div>
   </div>

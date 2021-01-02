@@ -1,7 +1,12 @@
 <ul id="participants" class="list-group">
   <% task.ordered_participants.each do |participant| %>
     <li class="list-group-item">
-      <%= participant.name %>
+      
+      <div class="d-flex justify-content-between">
+        <%= participant.name %>
+        <%= display_vote(participant) %>
+      </div>
+
     </li>
   <% end %>
 </ul>

@@ -1,27 +1,20 @@
-<%= form_with(model: task) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= turbo_frame_tag 'task_title' do %>
+  <div id="task_form">
+    <%= form_with(model: task) do |form| %>
+      <% if task.errors.any? %>
+        <div class="text-danger">
+          <ul>
+            <% task.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-      <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :revealed %>
-    <%= form.check_box :revealed %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+      <%= form.text_field :title, class: 'form-control' %>
+      <%= form.submit 'Update subject', class: 'btn btn-sm btn-primary mt-3' %>
+      
+    <% end %>
   </div>
 <% end %>

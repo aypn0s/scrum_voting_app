@@ -1,0 +1,12 @@
+<%= turbo_frame_tag 'vote_form' do %>
+  <%= form_with(model: @participant, url: participant_update_vote_path(@participant)) do |form| %>
+    
+    <div class="d-flex align-items-center justify-content-center">
+      <%= form.label :vote, 'Cast your vote:' %>
+      <%= form.select :vote, @vote_options, {include_blank: true}, class: 'form-select mx-4',
+        style: 'width: 10%;' %>
+      <%= form.submit 'Vote', class: 'btn btn-sm btn-primary' %>
+    </div>
+    
+  <% end %>
+<% end %>

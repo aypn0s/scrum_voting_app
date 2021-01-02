@@ -1,4 +1,10 @@
 class Task < ApplicationRecord
+  after_update_commit { broadcast_replace_to 'task', target: 'task_form', partial: 'tasks/form', 
+    locals: { task: self } }
+
+  after_update_commit { broadcast_replace_to 'task', target: 'participants', 
+    partial: 'participants/participant', locals: { task: self } }
+  
   # Validations
   validates :title, presence: true
 
