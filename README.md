@@ -1,24 +1,10 @@
-# README
+## Scrum Voting App with hotwire
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Installation instructions**
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- clone :)
+- `bundle install`
+- `rails db:create`
+- `rails db:migrate`
+- Ensure that redis server is running and adjust _config/cable.yml_ if needed
+- `rails s`
