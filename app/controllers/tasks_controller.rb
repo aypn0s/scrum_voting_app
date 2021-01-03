@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :update]
+  before_action :set_task, only: [:show, :update, :reset]
 
   # GET /tasks/1
   # GET /tasks/1.json
@@ -19,6 +19,12 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def reset
+    @task.participants.update_all(vote: nil)
+    @task.update(revealed: false, title: 'Initial subject')
+    redirect_to task_path(@task)
   end
 
   private

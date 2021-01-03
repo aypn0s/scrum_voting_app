@@ -14,7 +14,15 @@
   </div>
 
   <div class="row mt-5">
-    <div class="col">  
+    <div class="col">
+      <%= turbo_frame_tag 'reset_form' do %>
+        <%= render 'tasks/reset_form', task: @task %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
       <%= turbo_frame_tag 'task_title' do %>
         <%= render 'tasks/form', task: @task %>
       <% end %>

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     get :vote_form
     patch :update_vote
   end
-  resources :tasks
+  resources :tasks do
+    patch :reset
+  end
   root to: 'tasks#show'
 end
