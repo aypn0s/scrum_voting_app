@@ -1,23 +1,15 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :update, :reset]
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
     handle_participant
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
-  def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+  def update  
+    if @task.update(task_params)
+      redirect_to @task
+    else
+      render :edit
     end
   end
 
@@ -43,12 +35,15 @@ class TasksController < ApplicationController
         if Participant.exists?(session[:current_user_id])
           @participant = Participant.find(session[:current_user_id])
         else
-          @participant = @task.participants.create(name: Participant.generate_name)
-          session[:current_user_id] = @participant.id
+          init_participant
         end
       else
-        @participant = @task.participants.create(name: Participant.generate_name)
-        session[:current_user_id] = @participant.id
+        init_participant
       end
+    end
+
+    def init_participant
+      @participant = @task.participants.create(name: Participant.generate_name)
+      session[:current_user_id] = @participant.id
     end
 end

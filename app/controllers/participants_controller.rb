@@ -1,17 +1,11 @@
 class ParticipantsController < ApplicationController
   before_action :set_participant, only: [:update]
 
-  # PATCH/PUT /participants/1
-  # PATCH/PUT /participants/1.json
   def update
-    respond_to do |format|
-      if @participant.update(participant_params)
-        format.html { redirect_to task_path(@participant.task) }
-        format.json { render :show, status: :ok, location: @participant }
-      else
-        format.html { render :edit }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
-      end
+    if @participant.update(participant_params)
+      redirect_to task_path(@participant.task)
+    else
+      render :edit
     end
   end
 
@@ -33,9 +27,7 @@ class ParticipantsController < ApplicationController
   def update_vote
     @participant = Participant.find(params[:participant_id])
     @participant.update(participant_params)
-    respond_to do |format|
-      format.html { redirect_to participant_vote_form_path(@participant) }
-    end
+    redirect_to participant_vote_form_path(@participant)
   end
 
   private
