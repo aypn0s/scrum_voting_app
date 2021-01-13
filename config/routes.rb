@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :tasks do
     patch :reset
   end
-  root to: 'tasks#show'
+  root to: 'tasks#index'
 end

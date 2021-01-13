@@ -1,6 +1,7 @@
 ## Scrum Voting App with hotwire
+Simple scrum application to test hotwire, enjoy!
 
-**Installation instructions**
+**Instructions**
 
 - clone :)
 - `bundle install`

@@ -1,4 +1,8 @@
 class Task < ApplicationRecord
+  # Callbacks
+  after_create_commit { broadcast_append_to 'tasks', target: 'tasks', partial: 'tasks/task', 
+    locals: { task: self } }
+
   after_update_commit { broadcast_replace_to 'task', target: 'task_form', partial: 'tasks/form', 
     locals: { task: self } }
 
@@ -7,6 +11,8 @@ class Task < ApplicationRecord
 
   after_update_commit { broadcast_replace_to 'task', target: 'reset_form', 
     partial: 'tasks/reset_form', locals: { task: self } }
+
+  after_destroy_commit { broadcast_remove_to 'tasks' }
   
   # Validations
   validates :title, presence: true

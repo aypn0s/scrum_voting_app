@@ -1,0 +1,5 @@
+<li class="list-group-item d-flex justify-content-between" id="<%= dom_id(task) %>">
+  <%= link_to task.title, task %>
+
+  <%= link_to 'Remove', task_path(task), method: :delete, class: "btn btn-sm btn-danger" %>
+</li>

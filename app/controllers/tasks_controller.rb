@@ -1,6 +1,21 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :update, :reset]
 
+  def index
+    @tasks = Task.all
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(task_params)
+    if @task.save
+      redirect_to tasks_path
+    else
+      @tasks = Task.all
+      render :index
+    end
+  end
+
   def show
     handle_participant
   end
@@ -17,6 +32,10 @@ class TasksController < ApplicationController
     @task.participants.update_all(vote: nil)
     @task.update(revealed: false, title: 'Initial subject')
     redirect_to task_path(@task)
+  end
+
+  def destroy
+    Task.find(params[:id]).destroy
   end
 
   private
